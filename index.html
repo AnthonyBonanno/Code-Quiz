@@ -9,11 +9,13 @@
   <body>
     <header>
       <h1>Code Quiz</h1>
-      <button class="start-button">Start</button>
     </header>
 
     <main>
-      <section>
+
+
+
+      <section class="box-rules">
         <h2>Rules</h2>
         <div class="rules">
           <p>So you'd like to test you knowledge on HTML, CSS, and JavaScript? Well, you've come to the right place!
@@ -23,8 +25,57 @@
             avoid guessing! <strong>Good luck!</strong>
           </p>
         </div>
+        <div>
+          <center>
+            <button id="start-button">Start</button>
+          </center>
+        </div>
       </section>
+
+      <section class="box-questions hidden">
+        <h2 id="timeLeft"></h2>
+        <h2 id="question-text">Question Text</h2>
+        <div id="choices">
+          <ul>
+            <li id="choice0"></li>
+            <li id="choice1"></li>
+            <li id="choice2"></li>
+            <li id="choice3"></li>
+          </ul>
+        </div>
+        <div id="feedback"> <!-- document.querySelector("#feedback").innerText = "Correct!" -->
+        </div>
+      </section>
+
+      <section class="box-initials hidden">
+        <h2>Enter initials</h2>
+        Enter your initials. [input] [submit button]
+      </section>
+
+      <!-- Emmet shortcuts for VS Code -->
+
+      <section class="box-leaderboard hidden">
+        <h2>Leaderboard</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>AB</th>
+              <th>20</th>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+
+
     </main>
+
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
