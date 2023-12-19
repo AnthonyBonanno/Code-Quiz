@@ -3,7 +3,8 @@ var boxRules = document.querySelector(".box-rules");
 var boxQuestions = document.querySelector(".box-questions");
 var boxInitials = document.querySelector(".box-initials");
 var boxLeaderboard = document.querySelector(".box-leaderboard");
-var boxTimeLeft = document.querySelector("#timeLeft");
+var boxTimeLeft = document.querySelector("#timer");
+
 var choice0 = document.querySelector("#choice0");
 var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
@@ -27,57 +28,45 @@ var questions = [
         choice2: "_",
         choice3: "There is no symbol for IDs.",
         correctChoice: "choice1"
+    },
+    {
+        question: "Question 3: What symbol denotes a class element in CSS?",
+        choice0: "#",
+        choice1: ".",
+        choice2: "_",
+        choice3: "There is no symbol for IDs.",
+        correctChoice: "choice3"
+    },
+    {
+        question: "Question 4: What symbol denotes a class element in CSS?",
+        choice0: "#",
+        choice1: ".",
+        choice2: "_",
+        choice3: "There is no symbol for IDs.",
+        correctChoice: "choice2"
     }
 ]
 var questionIndex = 0;
 
-// SCENARIO 1
-// User sees: Question 0
-
-// User picked:
-var selectedChoice = "choice0"
-
-// "choice0"==="choice0" => True
-if(questions[0].correctChoice===selectedChoice) {
-    console.log("Correct")
-} else {
-    console.log("Incorrect")
-}
-
-// SCENARIO 2
-// User sees: Question 1
-
-// User picked:
-var selectedChoice = "choice0"
-
-// "choice1"==="choice0" => False
-if(questions[1].correctChoice===selectedChoice) {
-    console.log("Correct")
-} else {
-    console.log("Incorrect")
-}
-
-
-// 5==5
-// 5<10
-// <=
-// >=
-// >
-
 //new function for start timer
 function setTimer() {
-    var timeLeft = 60;
+    var timeLeft = 120;
     var timeInterval = setInterval(function () {
         if(timeLeft > 1) {
             boxTimeLeft.textContent = timeLeft + " seconds remaining";
             timeLeft--;
-        } else {
+        } else if (timeLeft === 1) {
+            // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+            boxTimeLeft.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+          } else {
             boxTimeLeft.textContent = '';
             clearInterval(timeInterval);
             // windowlocation.href
         }
-    }, 1000)   
+    }, 1000);   
 }
+setTimer();
 
 //function that ends the quiz
 function endQuiz() {
