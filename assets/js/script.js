@@ -134,5 +134,7 @@ choice3.addEventListener("click", function() {
     document.querySelector("#feedback").innerText="Incorrect"
 }
 questionIndex++;
-startOrNextQuestion();
+getInitials();
 })
+
+// lets the user enter their initials for their score
