@@ -2,6 +2,7 @@ var startButton = document.querySelector("#start-button");
 var boxRules = document.querySelector(".box-rules");
 var boxQuestions = document.querySelector(".box-questions");
 var boxInitials = document.querySelector(".box-initials");
+var submitButton = document.querySelector("#submit");
 var boxLeaderboard = document.querySelector(".box-leaderboard");
 var boxTimeLeft = document.querySelector("#timer");
 
@@ -10,6 +11,7 @@ var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
 
+var score = 0;
 
 
 var questions = [
@@ -68,12 +70,6 @@ function setTimer() {
 }
 setTimer();
 
-//function that ends the quiz
-function endQuiz() {
-    //store score in local storage
-    //then 
-}
-
 startButton.addEventListener("click", function() {
     boxRules.classList.add("hidden");
     boxQuestions.classList.remove("hidden");
@@ -87,6 +83,12 @@ function startOrNextQuestion() {
 
     //TODO: check if questionIndex is out of bounds (so check questions.length)
     // Then if it is, time to hide questions box and show initials entry box, AND pause the timer
+
+    if(questionIndex == questions.length) {
+        endQuiz();
+        return;
+    }
+
     document.querySelector("#question-text").textContent = questions[questionIndex].question
     document.querySelector("#choice0").textContent = questions[questionIndex].choice0
     document.querySelector("#choice1").textContent = questions[questionIndex].choice1
@@ -100,6 +102,7 @@ choice0.addEventListener("click", function() {
     var selectedChoice="choice0"
     if(questions[questionIndex].correctChoice===selectedChoice) {
     document.querySelector("#feedback").innerText="Correct"
+    score++;
 } else {
     document.querySelector("#feedback").innerText="Incorrect"
 }
@@ -110,6 +113,7 @@ choice1.addEventListener("click", function() {
     var selectedChoice="choice1"
     if(questions[questionIndex].correctChoice===selectedChoice) {
     document.querySelector("#feedback").innerText="Correct"
+    score++;
 } else {
     document.querySelector("#feedback").innerText="Incorrect"
 }
@@ -120,6 +124,7 @@ choice2.addEventListener("click", function() {
     var selectedChoice="choice2"
     if(questions[questionIndex].correctChoice===selectedChoice) {
     document.querySelector("#feedback").innerText="Correct"
+    score++;
 } else {
     document.querySelector("#feedback").innerText="Incorrect"
 }
@@ -129,12 +134,37 @@ startOrNextQuestion();
 choice3.addEventListener("click", function() {
     var selectedChoice="choice3"
     if(questions[questionIndex].correctChoice===selectedChoice) {
-    document.querySelector("#feedback").innerText="Correct"
-} else {
-    document.querySelector("#feedback").innerText="Incorrect"
-}
-questionIndex++;
-getInitials();
+        document.querySelector("#feedback").innerText="Correct"
+        score++;
+    } else {
+        document.querySelector("#feedback").innerText="Incorrect"
+    }
+    questionIndex++;
+    startOrNextQuestion();
 })
 
-// lets the user enter their initials for their score
+//function that ends the quiz
+function endQuiz() {
+    //store score in local storage
+
+    //store the new score (this neeeds to be changed)
+    //  Find all the current scores
+    //  add the new score to it
+    //  overwrite the localstorge with thew new "scores"
+    localStorage.setItem("score", score);
+    console.log(score);
+    boxQuestions.classList.add("hidden");
+    boxInitials.classList.remove("hidden");
+    //then 
+}
+
+submitButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    boxInitials.classList.add("hidden");
+    boxLeaderboard.classList.remove("hidden");
+    //read all the current scores
+    //Render them (show them) on the leaderboard
+})
+
+
+
